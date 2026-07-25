@@ -1,0 +1,1 @@
+import{o as e}from"./Spinner-CFB1Ud-F.js";import{A as t,N as n,R as r,k as i}from"./index-CXeC6wpG.js";var a=e(),o=e=>(0,a.jsx)(r,{icon:i,...e});o.displayName=`Alert01Icon`;var s=e=>(0,a.jsx)(r,{icon:n,...e});s.displayName=`CheckmarkCircle01Icon`;var c=e=>(0,a.jsx)(r,{icon:t,...e});c.displayName=`Clock01Icon`;export{s as n,o as r,c as t};
