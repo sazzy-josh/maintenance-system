@@ -64,7 +64,7 @@ export const NewRequestPage = () => {
     mutationFn: async (data: FormData) => {
       const formData = new FormData()
       Object.entries(data).forEach(([k, v]) => { if (v) formData.append(k, v) })
-      files.forEach(f => formData.append('attachments', f.file))
+      files.forEach(f => formData.append('images', f.file))
       return api.post('/requests', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })

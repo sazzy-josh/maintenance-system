@@ -45,7 +45,7 @@ const ActionModal = ({ toStatus, label, requestId, onClose }: ActionModalProps) 
       const formData = new FormData()
       formData.append('status', toStatus)
       if (note) formData.append('note', note)
-      files.forEach(f => formData.append('attachments', f))
+      files.forEach(f => formData.append('images', f))
       return api.patch(`/requests/${requestId}/status`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
