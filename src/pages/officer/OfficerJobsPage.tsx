@@ -22,10 +22,15 @@ export const OfficerJobsPage = () => {
 
   const { data, isLoading } = useQuery({
     queryKey: ['officer-jobs-all'],
-    queryFn: () => api.get('/assignments/my').then(r => r.data.data as ServiceRequest[]),
+    queryFn: () => api.get('/assignments/my').then(r =>
+      (r.data.data || []).map((a: { request: ServiceRequest; assignedAt: string }) => ({
+        ...a.request,
+        assignedAt: a.assignedAt,
+      }))
+    ),
   })
 
-  const allJobs: ServiceRequest[] = data || []
+  const allJobs: (ServiceRequest & { assignedAt: string })[] = data || []
   const jobs = tab === 'active'
     ? allJobs.filter(j => ['ASSIGNED', 'IN_PROGRESS', 'ON_HOLD'].includes(j.status))
     : tab === 'completed'
@@ -85,7 +90,7 @@ export const OfficerJobsPage = () => {
                     <td className="table-cell"><StatusBadge status={job.status} /></td>
                     <td className="table-cell"><PriorityBadge priority={job.priority} /></td>
                     <td className="table-cell text-gray-500 whitespace-nowrap text-xs">
-                      {job.assignments?.[0]?.assignedAt ? format(new Date(job.assignments[0].assignedAt), 'MMM d, yyyy') : '—'}
+                      {job.assignedAt ? format(new Date(job.assignedAt), 'MMM d, yyyy') : '—'}
                     </td>
                     <td className="table-cell">
                       <Link to={`/officer/jobs/${job.id}`} className="btn-secondary btn btn-sm text-xs">

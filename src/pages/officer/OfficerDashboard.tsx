@@ -53,7 +53,7 @@ export const OfficerDashboard = () => {
     queryFn: () => api.get('/assignments/my').then(r => r.data),
   })
 
-  const jobs: ServiceRequest[] = data?.data || []
+  const jobs: ServiceRequest[] = (data?.data || []).map((a: { request: ServiceRequest }) => a.request)
 
   const active = jobs.filter((j: ServiceRequest) => ['ASSIGNED', 'IN_PROGRESS', 'ON_HOLD'].includes(j.status))
   const completed = jobs.filter((j: ServiceRequest) => ['COMPLETED', 'CLOSED'].includes(j.status))
