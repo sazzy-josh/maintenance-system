@@ -37,7 +37,7 @@ describe('RegisterPage', () => {
     await user.type(screen.getByLabelText(/email/i), 'test@miva.university')
     await user.type(screen.getByLabelText(/matric/i), 'MTR2024001')
     await user.type(screen.getByLabelText(/^password \*/i), 'ValidPass@1')
-    await user.type(screen.getByLabelText(/confirm password/i), 'DifferentPass@1')
+    await user.type(screen.getByLabelText(/^confirm password/i), 'DifferentPass@1')
     await user.click(screen.getByRole('button', { name: /create account/i }))
     await waitFor(() => {
       expect(screen.getByText(/passwords do not match/i)).toBeInTheDocument()
